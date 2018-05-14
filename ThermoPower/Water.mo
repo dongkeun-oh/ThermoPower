@@ -813,7 +813,6 @@ outlet is ignored; use <t>Pump</t> models if this has to be taken into account c
     // Set fluid properties
     fluidState = Medium.setState_ph(p, h);
     T = Medium.temperature(fluidState);
-
     M = V*Medium.density(fluidState) "Fluid mass";
     E = M*Medium.specificInternalEnergy(fluidState) "Fluid energy";
     der(M) = in1.m_flow + in2.m_flow + out.m_flow "Fluid mass balance";

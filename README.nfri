@@ -1,0 +1,6 @@
+* This repository is an update of ThermoPower library to implement
+the TH components of cryogenic helium flow based on the LHe media package 
+imported from the ExternalMedia library 
+
+* Released by Dong Keun Oh with NFRI (National Fusion Research Institute) 
+in 2018/may/13

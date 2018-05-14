@@ -3,11 +3,12 @@ package Media "Medium models for the ThermoPower library"
   extends Modelica.Icons.Package;
 
   package GenericGas
-    extends Modelica.Media.Interfaces.PartialMedium(nXi=0);
+    extends Modelica.Media.Interfaces.PartialMedium(nXi = 0);
+
     redeclare record extends ThermodynamicState
-      AbsolutePressure p;
-      Temperature T;
-      // MassFraction X[nXi];
+        AbsolutePressure p;
+        Temperature T;
+        // MassFraction X[nXi];
     end ThermodynamicState;
   end GenericGas;
 
@@ -85,6 +86,44 @@ package Media "Medium models for the ThermoPower library"
 This Medium is a mixture of O2, H2O, CO2, N2, CH4. It has its reference composition, defined as <tt>Medium.reference_X</tt>, but only changing it, it can be reused as Air, just leading to zero the mass fraction of CH4, and as Fuel keeping only the mass fraction of CH4, as the unique gas.
 </html>"));
   end CombustionGas;
+
+  package Helium "Helium model from NIST RefProp database"
+    extends ExternalMedia.Media.CoolPropMedium(
+      mediumName="Helium",
+      libraryName="CoolProp",
+      substanceNames={"REFPROP-Helium"},
+      ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ph,
+      AbsolutePressure(
+        min=500,
+        max=44e5,
+        nominal=1e5,
+        start=1e5),
+      Density(
+        min=0.1,
+        max=200,
+        nominal=100,
+        start=100),
+      SpecificEnthalpy(
+        min=-6000,
+        max=1.7e6,
+        nominal=1000,
+        start=0),
+      SpecificEntropy(
+        min=-4000,
+        max=30e3,
+        nominal=1000,
+        start=0),
+      Temperature(
+        min=0.17, //2.17
+        max=310,
+        nominal=10,
+        start=5,
+        displayUnit="K"));
+  end Helium;
+
+
+
+
   annotation(Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Line(
