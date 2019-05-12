@@ -41,25 +41,25 @@ package LHe "Models of components with cryogenic helium as working fluid"
   package CryoHelium "ph_explicit cryogenic Helium model from NIST RefProp database"
     extends Media.Helium;
     /*    redeclare replaceable model BaseProperties "Base properties of helium"
-                                                                                                                                                                                                                                                          extends Modelica.Media.Interfaces.PartialTwoPhaseMedium.BaseProperties(h(stateSelect = StateSelect.prefer), d(stateSelect = StateSelect.default), T(stateSelect = StateSelect.default), p(stateSelect = StateSelect.prefer));
-                                                                                                                                                                                                                                                          Integer phase(min = 0, max = 2, start = 1, fixed = false) "2=two phase, 1=one phase, 0=unknown";
-                                                                                                                                                                                                                                                          SpecificEntropy s(stateSelect = StateSelect.default) "Specific entropy";
-                                                                                                                                                                                                                                                          SaturationProperties sat_ext "saturation property record";
-                                                                                                                                                                                                                                                        equation
-                                                                                                                                                                                                                                                          MM = externalFluidConstants.molarMass;
-                                                                                                                                                                                                                                                          phase = if h > bubbleEnthalpy(sat_ext) and h < dewEnthalpy(sat_ext) and p < externalFluidConstants.criticalPressure then 2 else 1;
-                                                                                                                                                                                                                                                          d = density_ph(p, h, phase);
-                                                                                                                                                                                                                                                          T = temperature_ph(p, h, phase);
-                                                                                                                                                                                                                                                          s = specificEntropy_ph(p, h, phase);
-                                                                                                                                                                                                                                                          sat.Tsat = saturationTemperature(p);
-                                                                                                                                                                                                                                                          sat.psat = p;
-                                                                                                                                                                                                                                                          u = h - p / d;
-                                                                                                                                                                                                                                                          R = Modelica.Constants.R / externalFluidConstants.molarMass;
-                                                                                                                                                                                                                                                          //h = state.h;
-                                                                                                                                                                                                                                                          //p = state.p;
-                                                                                                                                                                                                                                                          //T = state.T;
-                                                                                                                                                                                                                                                          //d = state.d;
-                                                                                                                                                                                                                                                        end BaseProperties; */
+                                                                                                                                                                                                                                                              extends Modelica.Media.Interfaces.PartialTwoPhaseMedium.BaseProperties(h(stateSelect = StateSelect.prefer), d(stateSelect = StateSelect.default), T(stateSelect = StateSelect.default), p(stateSelect = StateSelect.prefer));
+                                                                                                                                                                                                                                                              Integer phase(min = 0, max = 2, start = 1, fixed = false) "2=two phase, 1=one phase, 0=unknown";
+                                                                                                                                                                                                                                                              SpecificEntropy s(stateSelect = StateSelect.default) "Specific entropy";
+                                                                                                                                                                                                                                                              SaturationProperties sat_ext "saturation property record";
+                                                                                                                                                                                                                                                            equation
+                                                                                                                                                                                                                                                              MM = externalFluidConstants.molarMass;
+                                                                                                                                                                                                                                                              phase = if h > bubbleEnthalpy(sat_ext) and h < dewEnthalpy(sat_ext) and p < externalFluidConstants.criticalPressure then 2 else 1;
+                                                                                                                                                                                                                                                              d = density_ph(p, h, phase);
+                                                                                                                                                                                                                                                              T = temperature_ph(p, h, phase);
+                                                                                                                                                                                                                                                              s = specificEntropy_ph(p, h, phase);
+                                                                                                                                                                                                                                                              sat.Tsat = saturationTemperature(p);
+                                                                                                                                                                                                                                                              sat.psat = p;
+                                                                                                                                                                                                                                                              u = h - p / d;
+                                                                                                                                                                                                                                                              R = Modelica.Constants.R / externalFluidConstants.molarMass;
+                                                                                                                                                                                                                                                              //h = state.h;
+                                                                                                                                                                                                                                                              //p = state.p;
+                                                                                                                                                                                                                                                              //T = state.T;
+                                                                                                                                                                                                                                                              //d = state.d;
+                                                                                                                                                                                                                                                            end BaseProperties; */
   end CryoHelium;
 
   model SourcePressure "Pressure source for cryogenic helium flows"
@@ -4163,15 +4163,15 @@ Several functions are provided in the package <tt>Functions.PumpCharacteristics<
       parameter SI.PerUnit Kfc = 1 "Friction factor correction coefficient";
       constant SI.Acceleration g = Modelica.Constants.g_n;
       /*
-                                                                                                                                                                                                                                                                                                                                                                                                  FlangeA infl(p(start=pstartin),w(start=wnom),hAB(start=hstartin),
-                                                                                                                                                                                                                                                                                                                                                                                                    redeclare package Medium = Medium)
-                                                                                                                                                                                                                                                                                                                                                                                                    annotation (extent=[-120, -20; -80, 20]);
-                                                                                                                                                                                                                                                                                                                                                                                                  FlangeB outfl(p(start=pstartout),w(start=-wnom),hBA(start=hstartout),
-                                                                                                                                                                                                                                                                                                                                                                                                    redeclare package Medium = Medium)
-                                                                                                                                                                                                                                                                                                                                                                                                    annotation (extent=[80, -20; 120, 20]);
-                                                                                                                                                                                                                                                                                                                                                                                                  replaceable ThermoPower.Thermal.DHT wall(N=N)
-                                                                                                                                                                                                                                                                                                                                                                                                    annotation (extent=[-40, 40; 40, 60]);
-                                                                                                                                                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                                                                                                                                        FlangeA infl(p(start=pstartin),w(start=wnom),hAB(start=hstartin),
+                                                                                                                                                                                                                                                                                                                                                                                                          redeclare package Medium = Medium)
+                                                                                                                                                                                                                                                                                                                                                                                                          annotation (extent=[-120, -20; -80, 20]);
+                                                                                                                                                                                                                                                                                                                                                                                                        FlangeB outfl(p(start=pstartout),w(start=-wnom),hBA(start=hstartout),
+                                                                                                                                                                                                                                                                                                                                                                                                          redeclare package Medium = Medium)
+                                                                                                                                                                                                                                                                                                                                                                                                          annotation (extent=[80, -20; 120, 20]);
+                                                                                                                                                                                                                                                                                                                                                                                                        replaceable ThermoPower.Thermal.DHT wall(N=N)
+                                                                                                                                                                                                                                                                                                                                                                                                          annotation (extent=[-40, 40; 40, 60]);
+                                                                                                                                                                                                                                                                                                                                                                                                      */
       Medium.AbsolutePressure p(start = pstartin, stateSelect = StateSelect.prefer);
       Medium.MassFlowRate win(start = wnom) "Inlet flow rate";
       Medium.MassFlowRate wlb(start = wnom) "Flowrate from liquid volume to boiling volume";
@@ -6182,10 +6182,10 @@ outlet is ignored; use <t>Pump</t> models if this has to be taken into account c
     final parameter SI.Height head0 = dp0 / (rho0 * g) "Nominal pump head" annotation(
       Evaluate = true);
     /*final parameter Real d_head_dq_0 = (flowCharacteristic(q_single0 * 1.05) - flowCharacteristic(q_single0 * 0.95)) / (q_single0 * 0.1) "Approximate derivative of flow characteristic w.r.t. volume flow" annotation(
-                                                                                                                                                                                                                                                    Evaluate = true);
-                                                                                                                                                                                                                                                  final parameter Real d_head_dn_0 = 2 / n0 * head0 - q_single0 / n0 * d_head_dq_0 "Approximate derivative of the flow characteristic w.r.t. rotational speed" annotation(
-                                                                                                                                                                                                                                                    Evaluate = true);
-                                                                                                                                                                                                                                                  */
+                                                                                                                                                                                                                                                        Evaluate = true);
+                                                                                                                                                                                                                                                      final parameter Real d_head_dn_0 = 2 / n0 * head0 - q_single0 / n0 * d_head_dq_0 "Approximate derivative of the flow characteristic w.r.t. rotational speed" annotation(
+                                                                                                                                                                                                                                                        Evaluate = true);
+                                                                                                                                                                                                                                                      */
     Medium.MassFlowRate w_single(start = wstart / Np0) "Mass flow rate (single pump)";
     Medium.MassFlowRate w = Np * w_single "Mass flow rate (total)";
     SI.VolumeFlowRate q_single(start = wstart / (Np0 * rho0)) "Volume flow rate (single pump)";
@@ -6324,216 +6324,6 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
 </ul>
 </html>"));
   end Pump0;
-
-  model THEAmodel "FMU module of a THEA model with CryoSoft"
-    replaceable package Medium = CryoHelium constrainedby Modelica.Media.Interfaces.PartialMedium "Medium model" annotation(
-       choicesAllMatching = true);
-    constant String fmuLocation = "modelica://ThermoPower/Resources/FMUs";
-    constant String fmuContentsDir = "/Users/spinhalf/Documents/Modelica/ThermoPower/ThermoPower/Resources/FMUs/thea";
-    parameter String THEA_input = "./thea.input" annotation(
-      Dialog(tab = "FMI", group = "Path", loadSelector(filter = "Input files (*.input)", caption = "Open text file for reading")));
-    parameter Integer logLevel = 3 "log level used during the loading of FMU" annotation(
-      Dialog(tab = "FMI", group = "Enable logging"));
-    parameter Boolean debugLogging = true "enables the FMU simulation logging" annotation(
-      Dialog(tab = "FMI", group = "Enable logging"));
-    constant String mimeType = "";
-    constant Real timeout = 0.0;
-    constant Boolean visible = false;
-    constant Boolean interactive = false;
-    parameter Real startTime = 0.0 "start time used to initialize the slave" annotation(
-      Dialog(tab = "FMI", group = "Step time"));
-    parameter Real stopTime = 1.0 "stop time used to initialize the slave" annotation(
-      Dialog(tab = "FMI", group = "Step time"));
-    parameter Real numberOfSteps = 200 annotation(
-      Dialog(tab = "FMI", group = "Step time"));
-    parameter Real commStepSize = (stopTime - startTime) / numberOfSteps "step size used by fmiDoStep" annotation(
-      Dialog(tab = "FMI", group = "Step time"));
-    constant Boolean stopTimeDefined = true;
-    //
-    FlangeA infl(h_outflow(start = 100.), p(start = 1e5), redeclare package Medium = Medium, m_flow(min = -Modelica.Constants.inf)) annotation(
-      Placement(visible = true, transformation(origin = {-110, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-    FlangeB oufl(h_outflow(start = 100.), p(start = 1e5), redeclare package Medium = Medium, m_flow(max = +Modelica.Constants.inf)) annotation(
-      Placement(visible = true, transformation(origin = {110, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-  protected
-    FMI1CoSimulation fmi1cs = FMI1CoSimulation(logLevel, fmuContentsDir, "thea", debugLogging, fmuLocation, mimeType, timeout, visible, interactive, startTime, stopTimeDefined, stopTime);
-    parameter Real flowInitialized(fixed = false);
-    parameter String THEAworkDir = getTHEAworkDir(THEA_input);
-    Medium.SpecificEnthalpy hi, ho;
-    Medium.AbsolutePressure pi, po;
-    Medium.Temperature Ti, To;
-    Real flowStep;
-    Real ret[6];
-
-    class FMI1CoSimulation
-      extends ExternalObject;
-
-      function constructor
-        input Integer fmiLogLevel;
-        input String workingDirectory;
-        input String instanceName;
-        input Boolean debugLogging;
-        input String fmuLocation;
-        input String mimeType;
-        input Real timeOut;
-        input Boolean visible;
-        input Boolean interactive;
-        input Real tStart;
-        input Boolean stopTimeDefined;
-        input Real tStop;
-        output FMI1CoSimulation fmi1cs;
-      
-        external "C" fmi1cs = FMI1CoSimulationConstructor_OMC(fmiLogLevel, workingDirectory, instanceName, debugLogging, fmuLocation, mimeType, timeOut, visible, interactive, tStart, stopTimeDefined, tStop) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end constructor;
-
-      function destructor
-        input FMI1CoSimulation fmi1cs;
-      
-        external "C" FMI1CoSimulationDestructor_OMC(fmi1cs) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end destructor;
-    end FMI1CoSimulation;
-
-    //
-    //
-    //
-
-    package fmi1Functions
-      function fmi1InitializeSlave
-        input FMI1CoSimulation fmi1cs;
-        input Real preInitialized;
-        output Real postInitialized = preInitialized;
-      
-        external "C" fmi1InitializeSlave_OMC(fmi1cs) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end fmi1InitializeSlave;
-
-      function fmi1DoStep
-        input FMI1CoSimulation fmi1cs;
-        input Real currentCommunicationPoint;
-        input Real communicationStepSize;
-        input Boolean newStep;
-        input Real preInitialized;
-        output Real postInitialized = preInitialized;
-      
-        external "C" fmi1DoStep_OMC(fmi1cs, currentCommunicationPoint, communicationStepSize, newStep) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end fmi1DoStep;
-
-      function fmi1GetReal
-        input FMI1CoSimulation fmi1cs;
-        input Real realValuesReferences[:];
-        input Real inFlowStatesInput;
-        output Real realValues[size(realValuesReferences, 1)];
-      
-        external "C" fmi1GetReal_OMC(fmi1cs, size(realValuesReferences, 1), realValuesReferences, inFlowStatesInput, realValues, 2) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end fmi1GetReal;
-
-      function fmi1SetReal
-        input FMI1CoSimulation fmi1cs;
-        input Real realValuesReferences[:];
-        input Real realValues[size(realValuesReferences, 1)];
-      
-        external "C" fmi1SetReal_OMC(fmi1cs, size(realValuesReferences, 1), realValuesReferences, realValues, 2) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end fmi1SetReal;
-
-      function fmi1GetInteger
-        input FMI1CoSimulation fmi1cs;
-        input Real integerValuesReferences[:];
-        input Real inFlowStatesInput;
-        output Integer integerValues[size(integerValuesReferences, 1)];
-      
-        external "C" fmi1GetInteger_OMC(fmi1cs, size(integerValuesReferences, 1), integerValuesReferences, inFlowStatesInput, integerValues, 2) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end fmi1GetInteger;
-
-      function fmi1SetInteger
-        input FMI1CoSimulation fmi1cs;
-        input Real integerValuesReferences[:];
-        input Integer integerValues[size(integerValuesReferences, 1)];
-      
-        external "C" fmi1SetInteger_OMC(fmi1cs, size(integerValuesReferences, 1), integerValuesReferences, integerValues, 2) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end fmi1SetInteger;
-
-      function fmi1GetBoolean
-        input FMI1CoSimulation fmi1cs;
-        input Real booleanValuesReferences[:];
-        input Real inFlowStatesInput;
-        output Boolean booleanValues[size(booleanValuesReferences, 1)];
-      
-        external "C" fmi1GetBoolean_OMC(fmi1cs, size(booleanValuesReferences, 1), booleanValuesReferences, inFlowStatesInput, booleanValues, 2) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end fmi1GetBoolean;
-
-      function fmi1SetBoolean
-        input FMI1CoSimulation fmi1cs;
-        input Real booleanValuesReferences[:];
-        input Boolean booleanValues[size(booleanValuesReferences, 1)];
-      
-        external "C" fmi1SetBoolean_OMC(fmi1cs, size(booleanValuesReferences, 1), booleanValuesReferences, booleanValues, 2) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end fmi1SetBoolean;
-
-      function fmi1GetString
-        input FMI1CoSimulation fmi1cs;
-        input Real stringValuesReferences[:];
-        input Real inFlowStatesInput;
-        output String stringValues[size(stringValuesReferences, 1)];
-      
-        external "C" fmi1GetString_OMC(fmi1cs, size(stringValuesReferences, 1), stringValuesReferences, inFlowStatesInput, stringValues, 2) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end fmi1GetString;
-
-      function fmi1SetString
-        input FMI1CoSimulation fmi1cs;
-        input Real stringValuesReferences[:];
-        input String stringValues[size(stringValuesReferences, 1)];
-      
-        external "C" fmi1SetString_OMC(fmi1cs, size(stringValuesReferences, 1), stringValuesReferences, stringValues, 2) annotation(
-          Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
-      end fmi1SetString;
-    end fmi1Functions;
-
-    // Local utility functions
-
-    function getTHEAworkDir
-      input String path;
-      output String dir;
-    protected
-      String file, ext;
-    algorithm
-      (dir, file, ext) := Modelica.Utilities.Files.splitPathName(path);
-    end getTHEAworkDir;
-
-    //
-  initial algorithm
-    fmi1Functions.fmi1SetString(fmi1cs, {0.0, 1.0}, {THEA_input, THEAworkDir});
-    flowInitialized := fmi1Functions.fmi1InitializeSlave(fmi1cs, 1);
-  algorithm
-    fmi1Functions.fmi1SetReal(fmi1cs, {0., 1., 2., 3.}, {pi, po, Ti, To});
-    flowStep := fmi1Functions.fmi1DoStep(fmi1cs, time, commStepSize, true, flowInitialized);
-    ret := fmi1Functions.fmi1GetReal(fmi1cs, {4., 5., 6., 7., 8., 9.}, flowInitialized);
-  equation
-    hi = inStream(infl.h_outflow);
-    ho = inStream(oufl.h_outflow);
-    pi = infl.p;
-    po = oufl.p;
-    Ti = Medium.temperature_ph(pi, hi);
-    To = Medium.temperature_ph(po, ho);
-//
-    infl.m_flow = delay(ret[1], commStepSize) + der(pi) * commStepSize * delay(ret[5], commStepSize);
-    oufl.m_flow = delay(ret[2], commStepSize) + der(po) * commStepSize * delay(ret[6], commStepSize);
-    infl.h_outflow = Medium.specificEnthalpy_pT(pi, delay(ret[3], commStepSize));
-    oufl.h_outflow = Medium.specificEnthalpy_pT(po, delay(ret[4], commStepSize));
-//
-    annotation(
-      experiment(Tolerance = 1e-06, StartTime = 0, StopTime = 5, Interval = 0.0002),
-      Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {255, 255, 255}, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {0, 4, 169}, lineThickness = 0.5, extent = {{-100, -60}, {100, -100}}, textString = "%name"), Bitmap(extent = {{-95, 95}, {95, -60}}, fileName = "modelica://ThermoPower/Resources/Images/FMU.ico")}),
-      __OpenModelica_simulationFlags(lv = "LOG_STATS", maxIntegrationOrder = "36", s = "euler", jacobian = "kluSparse"));
-  end THEAmodel;
 
   function f_blasius "Fanning friction factor for cryogenic helium flows"
     input SI.MassFlowRate w;
