@@ -25,6 +25,7 @@ package Choices "Choice enumerations for ThermoPower models"
         OpPoint "Friction factor defined by operating point",
         Cfnom "Cfnom friction factor",
         Colebrook "Colebrook's equation",
+        Blasius "Blasius's equation",
         NoFriction "No friction")
       "Type, constants and menu choices to select the friction factor";
 
