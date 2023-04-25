@@ -6197,7 +6197,8 @@ outlet is ignored; use <t>Pump</t> models if this has to be taken into account c
     Medium.SpecificEnthalpy hout "Enthalpy of outgoing fluid";
     Units.LiquidDensity rho "Liquid density";
     Medium.Temperature Tin "Liquid inlet temperature";
-    NonSI.AngularVelocity_rpm n "Shaft r.p.m.";
+    //NonSI.AngularVelocity_rpm n "Shaft r.p.m.";
+    Modelica.Blocks.Interfaces.RealInput n (unit="rev/min") "Shaft r.p.m";
     Integer Np(min = 1) "Number of pumps in parallel";
     //SI.Power W_single "Power Consumption (single pump)";
     //SI.Power W = Np * W_single "Power Consumption (total)";
@@ -6363,10 +6364,10 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
     Medium.Temperature Ti, To;
     Real flowStep;
     Real ret[6];
-
+  
     class FMI1CoSimulation
       extends ExternalObject;
-
+  
       function constructor
         input Integer fmiLogLevel;
         input String workingDirectory;
@@ -6385,7 +6386,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
         external "C" fmi1cs = FMI1CoSimulationConstructor_OMC(fmiLogLevel, workingDirectory, instanceName, debugLogging, fmuLocation, mimeType, timeOut, visible, interactive, tStart, stopTimeDefined, tStop) annotation(
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end constructor;
-
+  
       function destructor
         input FMI1CoSimulation fmi1cs;
       
@@ -6393,11 +6394,11 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end destructor;
     end FMI1CoSimulation;
-
+  
     //
     //
     //
-
+  
     package fmi1Functions
       function fmi1InitializeSlave
         input FMI1CoSimulation fmi1cs;
@@ -6407,7 +6408,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
         external "C" fmi1InitializeSlave_OMC(fmi1cs) annotation(
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end fmi1InitializeSlave;
-
+  
       function fmi1DoStep
         input FMI1CoSimulation fmi1cs;
         input Real currentCommunicationPoint;
@@ -6419,7 +6420,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
         external "C" fmi1DoStep_OMC(fmi1cs, currentCommunicationPoint, communicationStepSize, newStep) annotation(
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end fmi1DoStep;
-
+  
       function fmi1GetReal
         input FMI1CoSimulation fmi1cs;
         input Real realValuesReferences[:];
@@ -6429,7 +6430,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
         external "C" fmi1GetReal_OMC(fmi1cs, size(realValuesReferences, 1), realValuesReferences, inFlowStatesInput, realValues, 2) annotation(
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end fmi1GetReal;
-
+  
       function fmi1SetReal
         input FMI1CoSimulation fmi1cs;
         input Real realValuesReferences[:];
@@ -6438,7 +6439,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
         external "C" fmi1SetReal_OMC(fmi1cs, size(realValuesReferences, 1), realValuesReferences, realValues, 2) annotation(
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end fmi1SetReal;
-
+  
       function fmi1GetInteger
         input FMI1CoSimulation fmi1cs;
         input Real integerValuesReferences[:];
@@ -6448,7 +6449,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
         external "C" fmi1GetInteger_OMC(fmi1cs, size(integerValuesReferences, 1), integerValuesReferences, inFlowStatesInput, integerValues, 2) annotation(
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end fmi1GetInteger;
-
+  
       function fmi1SetInteger
         input FMI1CoSimulation fmi1cs;
         input Real integerValuesReferences[:];
@@ -6457,7 +6458,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
         external "C" fmi1SetInteger_OMC(fmi1cs, size(integerValuesReferences, 1), integerValuesReferences, integerValues, 2) annotation(
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end fmi1SetInteger;
-
+  
       function fmi1GetBoolean
         input FMI1CoSimulation fmi1cs;
         input Real booleanValuesReferences[:];
@@ -6467,7 +6468,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
         external "C" fmi1GetBoolean_OMC(fmi1cs, size(booleanValuesReferences, 1), booleanValuesReferences, inFlowStatesInput, booleanValues, 2) annotation(
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end fmi1GetBoolean;
-
+  
       function fmi1SetBoolean
         input FMI1CoSimulation fmi1cs;
         input Real booleanValuesReferences[:];
@@ -6476,7 +6477,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
         external "C" fmi1SetBoolean_OMC(fmi1cs, size(booleanValuesReferences, 1), booleanValuesReferences, booleanValues, 2) annotation(
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end fmi1SetBoolean;
-
+  
       function fmi1GetString
         input FMI1CoSimulation fmi1cs;
         input Real stringValuesReferences[:];
@@ -6486,7 +6487,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
         external "C" fmi1GetString_OMC(fmi1cs, size(stringValuesReferences, 1), stringValuesReferences, inFlowStatesInput, stringValues, 2) annotation(
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end fmi1GetString;
-
+  
       function fmi1SetString
         input FMI1CoSimulation fmi1cs;
         input Real stringValuesReferences[:];
@@ -6496,9 +6497,9 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
           Library = {"OpenModelicaFMIRuntimeC", "fmilib"});
       end fmi1SetString;
     end fmi1Functions;
-
+  
     // Local utility functions
-
+  
     function getTHEAworkDir
       input String path;
       output String dir;
@@ -6507,7 +6508,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
     algorithm
       (dir, file, ext) := Modelica.Utilities.Files.splitPathName(path);
     end getTHEAworkDir;
-
+  
     //
   initial algorithm
     fmi1Functions.fmi1SetString(fmi1cs, {0.0, 1.0}, {THEA_input, THEAworkDir});
@@ -6523,12 +6524,12 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
     po = oufl.p;
     Ti = Medium.temperature_ph(pi, hi);
     To = Medium.temperature_ph(po, ho);
-//
+  //
     infl.m_flow = delay(ret[1], commStepSize) + der(pi) * commStepSize * delay(ret[5], commStepSize);
     oufl.m_flow = delay(ret[2], commStepSize) + der(po) * commStepSize * delay(ret[6], commStepSize);
     infl.h_outflow = Medium.specificEnthalpy_pT(pi, delay(ret[3], commStepSize));
     oufl.h_outflow = Medium.specificEnthalpy_pT(po, delay(ret[4], commStepSize));
-//
+  //
     annotation(
       experiment(Tolerance = 1e-06, StartTime = 0, StopTime = 5, Interval = 0.0002),
       Icon(coordinateSystem(preserveAspectRatio = false, initialScale = 0.1), graphics = {Rectangle(fillColor = {255, 255, 255}, lineThickness = 0.5, extent = {{-100, 100}, {100, -100}}), Text(lineColor = {0, 4, 169}, lineThickness = 0.5, extent = {{-100, -60}, {100, -100}}, textString = "%name"), Bitmap(extent = {{-95, 95}, {95, -60}}, fileName = "modelica://ThermoPower/Resources/Images/FMU.ico")}),
@@ -6569,7 +6570,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
       FlangeB oufl(h_outflow(start = 100.), p(start = 1e5), redeclare package Medium = Medium, m_flow(max = +Modelica.Constants.inf)) annotation(
         Placement(visible = true, transformation(origin = {110, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {120, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
       //
-      parameter String cpipe_input = "D:/Users/spinhalf.MICROWAVE/Work/FMIToolkits/test-cppfmu/src/fmu10/cpipe/_cpipe_core/test.in" annotation(
+      parameter String cpipe_input = "D:/Work/FMIToolkits/test-cppfmu/src/fmu10/cpipe/_cpipe_core/test.in" annotation(
         Dialog(tab = "FMI", group = "Path", loadSelector(filter = "Input files (*.in)", caption = "Open text file for reading")));
       Real ret[6];
     protected
@@ -6615,7 +6616,7 @@ by <a href=\"mailto:francesco.schiavo@polimi.it\">Francesco Schiavo</a>:<br>
 
     partial model PartialFMU "Prototype of imported FMU module"
       constant String fmuLocation = "file://";
-      constant String fmuContentsDir = "D:/Users/spinhalf.MICROWAVE/Work/FMIToolkits/test-cppfmu/fmu10/release/cpipe" annotation(
+      constant String fmuContentsDir = "D:/Work/FMIToolkits/test-cppfmu/fmu10/release/cpipe" annotation(
         Dialog(tab = "General", group = "Path", saveSelector(filter = "Directory", caption = "Retrive the FMU path")));
       parameter Integer logLevel = 3 "log level used during the loading of FMU" annotation(
         Dialog(tab = "FMI", group = "Enable logging"));

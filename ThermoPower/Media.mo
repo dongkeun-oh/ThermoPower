@@ -91,7 +91,7 @@ This Medium is a mixture of O2, H2O, CO2, N2, CH4. It has its reference composit
     extends ExternalMedia.Media.CoolPropMedium(
       mediumName="Helium",
       libraryName="CoolProp",
-      substanceNames={"REFPROP-Helium"},
+      substanceNames={"Helium"}, //REFPROP-Helium
       ThermoStates=Modelica.Media.Interfaces.Choices.IndependentVariables.ph,
       AbsolutePressure(
         min=500,
